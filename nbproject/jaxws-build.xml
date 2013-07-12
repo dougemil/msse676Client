@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+        *** GENERATED FROM jax-ws.xml - DO NOT EDIT !                             ***
+        *** TO MODIFY wsimport options USE Web Service node -> Edit WS Attributes ***
+        *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
+        *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
+
+        -->
+<project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+    <!--
+                ===================
+                JAX-WS WSIMPORT SECTION
+                ===================
+            -->
+    <target name="wsimport-init" depends="init">
+        <mkdir dir="${build.generated.sources.dir}/jax-ws"/>
+        <taskdef name="wsimport" classname="com.sun.tools.ws.ant.WsImport">
+            <classpath path="${libs.jaxws21.classpath}"/>
+        </taskdef>
+    </target>
+    <target name="wsimport-client-FieldObsImplService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/FieldObsImplService"/>
+        <property name="wsdl-FieldObsImplService" location="xml-resources/web-service-references/FieldObsImplService/wsdl/localhost_8080/msse676/FieldObsImplService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/FieldObsImplService" destdir="${build.generated.dir}/jax-wsCache/FieldObsImplService" wsdl="${wsdl-FieldObsImplService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/msse676/FieldObsImplService?wsdl" xendorsed="true" package="fieldObs">
+            <depends file="${wsdl-FieldObsImplService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/FieldObsImplService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/FieldObsImplService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-FieldObsImplService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/FieldObsImplService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/fieldObs"/>
+    </target>
+    <target name="wsimport-client-RemoteObsImplService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/RemoteObsImplService"/>
+        <property name="wsdl-RemoteObsImplService" location="xml-resources/web-service-references/RemoteObsImplService/wsdl/localhost_8080/msse676/RemoteObsImplService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/RemoteObsImplService" destdir="${build.generated.dir}/jax-wsCache/RemoteObsImplService" wsdl="${wsdl-RemoteObsImplService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/msse676/RemoteObsImplService?wsdl" xendorsed="true" package="remoteObs">
+            <depends file="${wsdl-RemoteObsImplService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/RemoteObsImplService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/RemoteObsImplService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-RemoteObsImplService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/RemoteObsImplService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/remoteObs"/>
+    </target>
+    <target name="wsimport-client-PointForecastImplService" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/PointForecastImplService"/>
+        <property name="wsdl-PointForecastImplService" location="xml-resources/web-service-references/PointForecastImplService/wsdl/localhost_8080/msse676/PointForecastImplService.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/PointForecastImplService" destdir="${build.generated.dir}/jax-wsCache/PointForecastImplService" wsdl="${wsdl-PointForecastImplService}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://localhost:8080/msse676/PointForecastImplService?wsdl" xendorsed="true" package="pointForecast">
+            <depends file="${wsdl-PointForecastImplService}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/PointForecastImplService"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/PointForecastImplService">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-PointForecastImplService" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/PointForecastImplService"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/pointForecast"/>
+    </target>
+    <target name="wsimport-client-services" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/services"/>
+        <property name="wsdl-services" location="xml-resources/web-service-references/services/wsdl/www.wcc.nrcs.usda.gov/awdbWebService/services.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/services" destdir="${build.generated.dir}/jax-wsCache/services" wsdl="${wsdl-services}" catalog="catalog.xml" extension="true" verbose="true" wsdlLocation="http://www.wcc.nrcs.usda.gov/awdbWebService/services?WSDL" xendorsed="true">
+            <depends file="${wsdl-services}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/services"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/services">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-services" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/services"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/gov/usda/nrcs/wcc/ns/awdbwebservice"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-FieldObsImplService, wsimport-client-RemoteObsImplService, wsimport-client-PointForecastImplService, wsimport-client-services"/>
+</project>

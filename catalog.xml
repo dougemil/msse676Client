@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/msse676/GetWxObservationsImplService?WSDL" uri="xml-resources/web-service-references/GetWxObservationsImplService/wsdl/localhost_8080/msse676/GetWxObservationsImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/GetWxObservationsImplService?xsd=1" uri="xml-resources/web-service-references/GetWxObservationsImplService/wsdl/localhost_8080/msse676/GetWxObservationsImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/WxSvcJDBCImplService?wsdl" uri="xml-resources/web-service-references/WxSvcJDBCImplService/wsdl/localhost_8080/msse676/WxSvcJDBCImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/WxSvcJDBCImplService?xsd=1" uri="xml-resources/web-service-references/WxSvcJDBCImplService/wsdl/localhost_8080/msse676/WxSvcJDBCImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/GetForecastImplService?wsdl" uri="xml-resources/web-service-references/GetForecastImplService/wsdl/localhost_8080/msse676/GetForecastImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/GetForecastImplService?xsd=1" uri="xml-resources/web-service-references/GetForecastImplService/wsdl/localhost_8080/msse676/GetForecastImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/PointForecastImplService?wsdl" uri="xml-resources/web-service-references/PointForecastImplService/wsdl/localhost_8080/msse676/PointForecastImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/PointForecastImplService?xsd=1" uri="xml-resources/web-service-references/PointForecastImplService/wsdl/localhost_8080/msse676/PointForecastImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/RemoteObsImplService?wsdl" uri="xml-resources/web-service-references/RemoteObsImplService/wsdl/localhost_8080/msse676/RemoteObsImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/RemoteObsImplService?xsd=1" uri="xml-resources/web-service-references/RemoteObsImplService/wsdl/localhost_8080/msse676/RemoteObsImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/FieldObsImplService?wsdl" uri="xml-resources/web-service-references/FieldObsImplService/wsdl/localhost_8080/msse676/FieldObsImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/FieldObsImplService?xsd=1" uri="xml-resources/web-service-references/FieldObsImplService/wsdl/localhost_8080/msse676/FieldObsImplService.xsd_1.xsd"/>
+    <system systemId="http://www.wcc.nrcs.usda.gov/awdbWebService/services?WSDL" uri="xml-resources/web-service-references/services/wsdl/www.wcc.nrcs.usda.gov/awdbWebService/services.wsdl"/>
+</catalog>
