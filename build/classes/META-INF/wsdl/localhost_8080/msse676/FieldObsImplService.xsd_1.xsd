@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.2.0-1 (tags/2.2.0u1-7139; 2012-06-02T10:55:19+0000) JAXWS-RI/2.2.6-2 JAXWS/2.2 svn-revision#unknown. --><xs:schema xmlns:tns="http://services/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://services/">
+
+<xs:element name="getFieldObs" type="tns:getFieldObs"/>
+
+<xs:element name="getFieldObsResponse" type="tns:getFieldObsResponse"/>
+
+<xs:complexType name="getFieldObs">
+<xs:sequence>
+<xs:element name="arg0" type="xs:dateTime" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getFieldObsResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:weatherDataBean" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="weatherDataBean">
+<xs:sequence>
+<xs:element name="baseElevation" type="xs:string" minOccurs="0"/>
+<xs:element name="baseTemp" type="xs:string" minOccurs="0"/>
+<xs:element name="comments" type="xs:string" minOccurs="0"/>
+<xs:element name="dateString" type="xs:string" minOccurs="0"/>
+<xs:element name="gustSpreadMax" type="xs:string" minOccurs="0"/>
+<xs:element name="gustSpreadMin" type="xs:string" minOccurs="0"/>
+<xs:element name="location" type="xs:string" minOccurs="0"/>
+<xs:element name="sky" type="xs:string" minOccurs="0"/>
+<xs:element name="sqlDate" type="tns:date" minOccurs="0"/>
+<xs:element name="summitElevation" type="xs:string" minOccurs="0"/>
+<xs:element name="summitTemp" type="xs:string" minOccurs="0"/>
+<xs:element name="time" type="xs:string" minOccurs="0"/>
+<xs:element name="windDirection" type="xs:string" minOccurs="0"/>
+<xs:element name="windSpeed" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="date">
+<xs:sequence/>
+</xs:complexType>
+</xs:schema>

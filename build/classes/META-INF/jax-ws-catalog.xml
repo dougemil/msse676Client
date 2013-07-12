@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/msse676/GetWxObservationsImplService?WSDL" uri="wsdl/localhost_8080/msse676/GetWxObservationsImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/GetWxObservationsImplService?xsd=1" uri="wsdl/localhost_8080/msse676/GetWxObservationsImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/WxSvcJDBCImplService?wsdl" uri="wsdl/localhost_8080/msse676/WxSvcJDBCImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/WxSvcJDBCImplService?xsd=1" uri="wsdl/localhost_8080/msse676/WxSvcJDBCImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/GetForecastImplService?wsdl" uri="wsdl/localhost_8080/msse676/GetForecastImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/GetForecastImplService?xsd=1" uri="wsdl/localhost_8080/msse676/GetForecastImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/FieldObsImplService?wsdl" uri="wsdl/localhost_8080/msse676/FieldObsImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/FieldObsImplService?xsd=1" uri="wsdl/localhost_8080/msse676/FieldObsImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/RemoteObsImplService?wsdl" uri="wsdl/localhost_8080/msse676/RemoteObsImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/RemoteObsImplService?xsd=1" uri="wsdl/localhost_8080/msse676/RemoteObsImplService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/msse676/PointForecastImplService?wsdl" uri="wsdl/localhost_8080/msse676/PointForecastImplService.wsdl"/>
+    <system systemId="http://localhost:8080/msse676/PointForecastImplService?xsd=1" uri="wsdl/localhost_8080/msse676/PointForecastImplService.xsd_1.xsd"/>
+    <system systemId="http://www.wcc.nrcs.usda.gov/awdbWebService/services?WSDL" uri="wsdl/www.wcc.nrcs.usda.gov/awdbWebService/services.wsdl"/>
+</catalog>
