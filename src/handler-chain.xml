@@ -6,10 +6,10 @@
     xmlns:ksd="http://www.w3.org/2001/XML/Schema">
     <javaee:handler-chain>
         <javaee:handler>
-            <javaee:handler-class>msse676client.HeaderHandler</javaee:handler-class>
+            <javaee:handler-class>msse676client.handler.HeaderHandler</javaee:handler-class>
         </javaee:handler>
-        <javaee:handler>
+<!--        <javaee:handler>
             <javaee:handler-class>msse676client.SecurityHandler</javaee:handler-class>
-        </javaee:handler>
+        </javaee:handler>-->
     </javaee:handler-chain>
 </javaee:handler-chains>

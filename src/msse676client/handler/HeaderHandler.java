@@ -30,7 +30,7 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
 
     @Override
     public Set<QName> getHeaders() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return null;
     }
 
     @Override

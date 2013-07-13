@@ -39,13 +39,20 @@ public class Msse676Client {
         
         GregorianCalendar gC = new GregorianCalendar(2012, 0, 1);
 
-        Ob ob = getRemoteObs(gC, gC);
-        System.out.println(ob.getMessage());
+        
+            Ob ob = getRemoteObs(gC, gC);
+            System.out.println(ob.getMessage());
+        
 
         // This operation is dependent on local DB access
-        WeatherDataBean bean = getFieldObs(gC);
-        System.out.println(bean.getComments());
-
+        try{
+            WeatherDataBean bean = getFieldObs(gC);
+            System.out.println(bean.getComments());
+        }catch(Exception e){
+            System.out.print("Service Fault: ");
+            //System.out.println(e.getDetails());
+        }
+        
         ForecastBean fcstBean = getPointForecast(1, 1, gC);
         System.out.println(fcstBean.getMessage());
 
