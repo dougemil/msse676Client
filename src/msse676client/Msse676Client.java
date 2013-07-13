@@ -6,6 +6,8 @@
 package msse676client;
 
 import fieldObs.FieldObs;
+import fieldObs.FieldObsException;
+import fieldObs.FieldObsException_Exception;
 import fieldObs.FieldObsImplService;
 import fieldObs.WeatherDataBean;
 import gov.usda.nrcs.wcc.ns.awdbwebservice.StationMetaData;
@@ -40,18 +42,14 @@ public class Msse676Client {
         GregorianCalendar gC = new GregorianCalendar(2012, 0, 1);
 
         
-            Ob ob = getRemoteObs(gC, gC);
-            System.out.println(ob.getMessage());
+        Ob ob = getRemoteObs(gC, gC);
+        System.out.println(ob.getMessage());
         
 
         // This operation is dependent on local DB access
-        try{
-            WeatherDataBean bean = getFieldObs(gC);
-            System.out.println(bean.getComments());
-        }catch(Exception e){
-            System.out.print("Service Fault: ");
-            //System.out.println(e.getDetails());
-        }
+        WeatherDataBean bean = getFieldObs(gC);
+        System.out.println(bean.getComments());
+        
         
         ForecastBean fcstBean = getPointForecast(1, 1, gC);
         System.out.println(fcstBean.getMessage());
@@ -88,14 +86,23 @@ public class Msse676Client {
     }
     
     private static WeatherDataBean getFieldObs(GregorianCalendar gC){
-        
+       WeatherDataBean bean = null;
+       
        FieldObsImplService service = new FieldObsImplService();
        FieldObs port = service.getFieldObsImplPort();
        
        // Service call requires XMLGregorianCalendar parameters
-       // Uses port to call method from web service
-       XMLGregorianCalendar xC = parseToXMLGregorianDate(gC);  
-       return port.getFieldObs(xC);
+       XMLGregorianCalendar xC = parseToXMLGregorianDate(gC);
+       
+       
+        try {
+            // Uses port to call method from web service
+            bean = port.getFieldObs(xC);
+        // Custom fault handling
+        } catch (FieldObsException_Exception ex) {
+            Logger.getLogger(Msse676Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return bean;
 
     }
     

@@ -25,6 +25,7 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetFieldObsResponse_QNAME = new QName("http://services/", "getFieldObsResponse");
+    private final static QName _FieldObsException_QNAME = new QName("http://services/", "FieldObsException");
     private final static QName _GetFieldObs_QNAME = new QName("http://services/", "getFieldObs");
 
     /**
@@ -40,6 +41,14 @@ public class ObjectFactory {
      */
     public GetFieldObs createGetFieldObs() {
         return new GetFieldObs();
+    }
+
+    /**
+     * Create an instance of {@link FieldObsException }
+     * 
+     */
+    public FieldObsException createFieldObsException() {
+        return new FieldObsException();
     }
 
     /**
@@ -73,6 +82,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://services/", name = "getFieldObsResponse")
     public JAXBElement<GetFieldObsResponse> createGetFieldObsResponse(GetFieldObsResponse value) {
         return new JAXBElement<GetFieldObsResponse>(_GetFieldObsResponse_QNAME, GetFieldObsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FieldObsException }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services/", name = "FieldObsException")
+    public JAXBElement<FieldObsException> createFieldObsException(FieldObsException value) {
+        return new JAXBElement<FieldObsException>(_FieldObsException_QNAME, FieldObsException.class, null, value);
     }
 
     /**
