@@ -2,7 +2,7 @@
  * Web Service Client Application
  * References services from msse676
  * 
- * Employs the HandlerResolver pattern
+ * Employs a Handler pattern in two different ways
  * Employs a custom Web Service Exception pattern
  * 
  * 
@@ -36,7 +36,7 @@ import remoteObs.RemoteObsImplService;
 /**
  *
  * @author dougkrause
- * msse676 wk2
+ * msse676 wk3
  * 
  */
 public class Msse676Client {
@@ -117,7 +117,9 @@ public class Msse676Client {
         // Custom Fault Handling
         } catch (ObsNotFoundException_Exception ex) {
             
+            // Get a reference to the custom fault object
             ObsNotFoundException oNFE = ex.getFaultInfo();
+            // Gets exception msg and details
             Logger.getLogger(Msse676Client.class.getName())
                     .log(Level.INFO, ex.getMessage() + ": " + oNFE.getDetails());
             

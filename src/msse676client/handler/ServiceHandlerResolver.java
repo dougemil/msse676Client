@@ -1,5 +1,5 @@
 /*
- * This class supports adding Handler classes to a chain programmatically
+ * This class supports adding Handler classes to a handler chain programmatically
  */
 package msse676client.handler;
 
@@ -25,7 +25,6 @@ public class ServiceHandlerResolver implements HandlerResolver{
         
         List<Handler> handlers = new ArrayList<Handler>();
         handlers.add(new LoggingHandler());
-//        handlers.add(new HeaderHandler());
         
         return handlers;
     }
