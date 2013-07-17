@@ -31,19 +31,19 @@ public interface FieldObs {
      * @param arg0
      * @return
      *     returns fieldObs.WeatherDataBean
-     * @throws FieldObsException_Exception
+     * @throws ObsNotFoundException_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getFieldObs", targetNamespace = "http://services/", className = "fieldObs.GetFieldObs")
     @ResponseWrapper(localName = "getFieldObsResponse", targetNamespace = "http://services/", className = "fieldObs.GetFieldObsResponse")
     @Action(input = "http://services/FieldObs/getFieldObsRequest", output = "http://services/FieldObs/getFieldObsResponse", fault = {
-        @FaultAction(className = FieldObsException_Exception.class, value = "http://services/FieldObs/getFieldObs/Fault/FieldObsException")
+        @FaultAction(className = ObsNotFoundException_Exception.class, value = "http://services/FieldObs/getFieldObs/Fault/ObsNotFoundException")
     })
     public WeatherDataBean getFieldObs(
         @WebParam(name = "arg0", targetNamespace = "")
         XMLGregorianCalendar arg0)
-        throws FieldObsException_Exception
+        throws ObsNotFoundException_Exception
     ;
 
 }

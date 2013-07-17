@@ -25,8 +25,8 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetFieldObsResponse_QNAME = new QName("http://services/", "getFieldObsResponse");
-    private final static QName _FieldObsException_QNAME = new QName("http://services/", "FieldObsException");
     private final static QName _GetFieldObs_QNAME = new QName("http://services/", "getFieldObs");
+    private final static QName _ObsNotFoundException_QNAME = new QName("http://services/", "ObsNotFoundException");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: fieldObs
@@ -36,19 +36,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ObsNotFoundException }
+     * 
+     */
+    public ObsNotFoundException createObsNotFoundException() {
+        return new ObsNotFoundException();
+    }
+
+    /**
      * Create an instance of {@link GetFieldObs }
      * 
      */
     public GetFieldObs createGetFieldObs() {
         return new GetFieldObs();
-    }
-
-    /**
-     * Create an instance of {@link FieldObsException }
-     * 
-     */
-    public FieldObsException createFieldObsException() {
-        return new FieldObsException();
     }
 
     /**
@@ -85,21 +85,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link FieldObsException }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://services/", name = "FieldObsException")
-    public JAXBElement<FieldObsException> createFieldObsException(FieldObsException value) {
-        return new JAXBElement<FieldObsException>(_FieldObsException_QNAME, FieldObsException.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetFieldObs }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://services/", name = "getFieldObs")
     public JAXBElement<GetFieldObs> createGetFieldObs(GetFieldObs value) {
         return new JAXBElement<GetFieldObs>(_GetFieldObs_QNAME, GetFieldObs.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObsNotFoundException }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services/", name = "ObsNotFoundException")
+    public JAXBElement<ObsNotFoundException> createObsNotFoundException(ObsNotFoundException value) {
+        return new JAXBElement<ObsNotFoundException>(_ObsNotFoundException_QNAME, ObsNotFoundException.class, null, value);
     }
 
 }

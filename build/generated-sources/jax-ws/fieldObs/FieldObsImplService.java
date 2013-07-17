@@ -19,7 +19,7 @@ import javax.xml.ws.WebServiceFeature;
  * 
  */
 @WebServiceClient(name = "FieldObsImplService", targetNamespace = "http://services/", wsdlLocation = "http://localhost:8080/msse676/FieldObsImplService?wsdl")
-@HandlerChain(file = "handler-chain.xml")
+@HandlerChain(file="handler-chain.xml")
 public class FieldObsImplService
     extends Service
 {

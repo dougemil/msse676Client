@@ -1,7 +1,10 @@
 /*
  * This class implements a SOAPHandler to insert
  * a timestamp on incoming messages. Example of the
- * intercptor pattern
+ * intercptor pattern.
+ * 
+ * In this project the Handler is implemented declaratively
+ * which requires annotation in the generated service class.
  * 
  */
 package msse676client.handler;

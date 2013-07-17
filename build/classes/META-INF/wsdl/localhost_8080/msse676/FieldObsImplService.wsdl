@@ -10,14 +10,14 @@
 <message name="getFieldObsResponse">
 <part name="parameters" element="tns:getFieldObsResponse"/>
 </message>
-<message name="FieldObsException">
-<part name="fault" element="tns:FieldObsException"/>
+<message name="ObsNotFoundException">
+<part name="fault" element="tns:ObsNotFoundException"/>
 </message>
 <portType name="FieldObs">
 <operation name="getFieldObs">
 <input wsam:Action="http://services/FieldObs/getFieldObsRequest" message="tns:getFieldObs"/>
 <output wsam:Action="http://services/FieldObs/getFieldObsResponse" message="tns:getFieldObsResponse"/>
-<fault message="tns:FieldObsException" name="FieldObsException" wsam:Action="http://services/FieldObs/getFieldObs/Fault/FieldObsException"/>
+<fault message="tns:ObsNotFoundException" name="ObsNotFoundException" wsam:Action="http://services/FieldObs/getFieldObs/Fault/ObsNotFoundException"/>
 </operation>
 </portType>
 <binding name="FieldObsImplPortBinding" type="tns:FieldObs">
@@ -30,8 +30,8 @@
 <output>
 <soap:body use="literal"/>
 </output>
-<fault name="FieldObsException">
-<soap:fault name="FieldObsException" use="literal"/>
+<fault name="ObsNotFoundException">
+<soap:fault name="ObsNotFoundException" use="literal"/>
 </fault>
 </operation>
 </binding>

@@ -2,7 +2,8 @@
  * Web Service Client Application
  * References services from msse676
  * 
- * This class employs the HandlerResolver pattern
+ * Employs the HandlerResolver pattern
+ * Employs a custom Web Service Exception pattern
  * 
  * 
  */
@@ -12,6 +13,8 @@ import fieldObs.FieldObs;
 import fieldObs.FieldObsException;
 import fieldObs.FieldObsException_Exception;
 import fieldObs.FieldObsImplService;
+import fieldObs.ObsNotFoundException;
+import fieldObs.ObsNotFoundException_Exception;
 import fieldObs.WeatherDataBean;
 import gov.usda.nrcs.wcc.ns.awdbwebservice.StationMetaData;
 import java.math.BigDecimal;
@@ -43,7 +46,11 @@ public class Msse676Client {
      */
     public static void main(String[] args) {
         
+        String stationTriplet = "1095:AK:SNTL";
         GregorianCalendar gC = new GregorianCalendar(2012, 0, 1);
+        
+        // Uncomment to test ObsNotFoundException handling
+        // gC.set(1900, 0, 1);
         
         // Implements LoggingHandler programmatically
         Ob ob = getRemoteObs(gC, gC);
@@ -51,9 +58,10 @@ public class Msse676Client {
         
 
         // This operation is dependent on local DB access
-        // Implement HeaderHandler declaratively
+        // Implements HeaderHandler declaratively (Requires annotation in gen class)
         WeatherDataBean bean = getFieldObs(gC);
-        System.out.println(bean.getComments());
+        if (bean != null)
+            System.out.println(bean.getComments());
         
         
         ForecastBean fcstBean = getPointForecast(1, 1, gC);
@@ -63,7 +71,7 @@ public class Msse676Client {
          * Accesses NRCS Air and Water DB
          */
         AWDB_Svc awdb = new AWDB_Svc();
-        StationMetaData mData = awdb.getStationMetadata("1095:AK:SNTL");
+        StationMetaData mData = awdb.getStationMetadata(stationTriplet);
         String name = mData.getName();
         String cName = mData.getCountyName();
         BigDecimal elev = mData.getElevation();
@@ -74,10 +82,6 @@ public class Msse676Client {
     
     /**
      * Use JAX-WS Generated Sources packages and Web Service References
-     * 
-     * @param gC1 
-     * @param gC2 
-     * @return msse676.Domain.Ob
      */
     private static Ob getRemoteObs(GregorianCalendar gC1, GregorianCalendar gC2){
         RemoteObsImplService service = new RemoteObsImplService();
@@ -109,9 +113,16 @@ public class Msse676Client {
         try {
             // Uses port to call method from web service
             bean = port.getFieldObs(xC);
-        // Custom fault handling
-        } catch (FieldObsException_Exception ex) {
-            Logger.getLogger(Msse676Client.class.getName()).log(Level.SEVERE, null, ex);
+            
+        // Custom Fault Handling
+        } catch (ObsNotFoundException_Exception ex) {
+            
+            ObsNotFoundException oNFE = ex.getFaultInfo();
+            Logger.getLogger(Msse676Client.class.getName())
+                    .log(Level.INFO, ex.getMessage() + ": " + oNFE.getDetails());
+            
+            
+            
         }
        return bean;
 
