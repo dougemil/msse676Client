@@ -10,8 +10,6 @@
 package msse676client;
 
 import fieldObs.FieldObs;
-import fieldObs.FieldObsException;
-import fieldObs.FieldObsException_Exception;
 import fieldObs.FieldObsImplService;
 import fieldObs.ObsNotFoundException;
 import fieldObs.ObsNotFoundException_Exception;
