@@ -1,6 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Implements a Logical Handler to add logging information
+ * to message body. Handler is added to the handler-chain
+ * programmatically using a HandlerResolver
+ * 
  */
 package msse676client.handler;
 
@@ -15,10 +17,14 @@ import javax.xml.ws.handler.LogicalMessageContext;
 import javax.xml.ws.handler.MessageContext;
 import pointForecast.ForecastBean;
 import pointForecast.GetPointForecastResponse;
+import remoteObs.GetObsRangeResponse;
+import remoteObs.Ob;
 
 /**
  *
  * @author dougkrause
+ * msse676 - wk3
+ * 
  */
 public class LoggingHandler implements LogicalHandler<LogicalMessageContext> {
 
@@ -33,19 +39,21 @@ public class LoggingHandler implements LogicalHandler<LogicalMessageContext> {
         
             try{
                 // context used to extract msg payload
-                JAXBContext jaxb_ctx = JAXBContext.newInstance("whatever");
+                JAXBContext jaxb_ctx = JAXBContext.newInstance("remoteObs");
                 Object payload = msg.getPayload(jaxb_ctx);
                 
                 if(payload instanceof JAXBElement){
                     Object obj = ((JAXBElement)payload).getValue();
                     
                     // GetPointForecastResponse is a generated class
-                    if(obj instanceof GetPointForecastResponse){
-                        GetPointForecastResponse resp = (GetPointForecastResponse)obj;
+                    if(obj instanceof GetObsRangeResponse){
+                        
+                        GetObsRangeResponse resp = (GetObsRangeResponse)obj;
                         // getReturn() is a convenience method
                         // ForecastBean maps to WSDL so its methods are available
-                        ForecastBean fcst = resp.getReturn();
-                        System.out.println(fcst.getMessage());
+                        Ob ob = resp.getReturn();
+                        Logger.getLogger(HeaderHandler.class.getName())
+                                    .log(Level.INFO, "Logging from LoggingHandler");
                     }
                 }
             }catch(JAXBException ex){
@@ -63,7 +71,8 @@ public class LoggingHandler implements LogicalHandler<LogicalMessageContext> {
 
     @Override
     public void close(MessageContext mc) {
-        throw new UnsupportedOperationException("Not supported yet.");
+//        Logger.getLogger(HeaderHandler.class.getName())
+//                                    .log(Level.INFO, "dk: closed");
     }
     
     

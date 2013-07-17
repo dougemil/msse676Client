@@ -1,13 +1,15 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * This class implements a SOAPHandler to insert
+ * a timestamp on incoming messages. Example of the
+ * intercptor pattern
+ * 
  */
 package msse676client.handler;
 
-import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,6 +27,8 @@ import javax.xml.ws.handler.soap.SOAPMessageContext;
 /**
  *
  * @author dougkrause
+ * msse676 - wk3
+ * 
  */
 public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
 
@@ -50,12 +54,12 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
                 SOAPEnvelope env = msg.getSOAPPart().getEnvelope();
                 SOAPHeader header = env.getHeader();
                 
-                // Header is optionalso it may be null
+                // Header is optional so it may be null
                 if(header == null)
                     header = env.addHeader();
                 
                 // URI will appear in header as the name space
-                // new element named "sent-time"
+                // new header element named "sent-time"
                 QName name = new QName("http://service.msse676", "Sent-time");
                 SOAPHeaderElement el = header.addHeaderElement(name);
                 
@@ -64,6 +68,8 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
                 el.addTextNode(df.format(dt)); // set time stamp
                 // commit
                 msg.saveChanges();
+                Logger.getLogger(HeaderHandler.class.getName())
+                                    .log(Level.INFO, "Time stamp set from HeaderHandler");
             }catch(SOAPException ex){
                 Logger.getLogger(HeaderHandler.class.getName())
                                         .log(Level.SEVERE, null, ex);
@@ -82,8 +88,8 @@ public class HeaderHandler implements SOAPHandler<SOAPMessageContext> {
 
     @Override
     public void close(MessageContext mc) {
-        Logger.getLogger(HeaderHandler.class.getName())
-                                    .log(Level.INFO, "closed");
+//        Logger.getLogger(HeaderHandler.class.getName())
+//                                    .log(Level.INFO, "closed");
     }
     
 }

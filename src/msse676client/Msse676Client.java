@@ -2,6 +2,9 @@
  * Web Service Client Application
  * References services from msse676
  * 
+ * This class employs the HandlerResolver pattern
+ * 
+ * 
  */
 package msse676client;
 
@@ -19,6 +22,7 @@ import java.util.logging.Logger;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import msse676client.handler.ServiceHandlerResolver;
 import pointForecast.ForecastBean;
 import pointForecast.PointForecast;
 import pointForecast.PointForecastImplService;
@@ -40,13 +44,14 @@ public class Msse676Client {
     public static void main(String[] args) {
         
         GregorianCalendar gC = new GregorianCalendar(2012, 0, 1);
-
         
+        // Implements LoggingHandler programmatically
         Ob ob = getRemoteObs(gC, gC);
         System.out.println(ob.getMessage());
         
 
         // This operation is dependent on local DB access
+        // Implement HeaderHandler declaratively
         WeatherDataBean bean = getFieldObs(gC);
         System.out.println(bean.getComments());
         
@@ -76,7 +81,13 @@ public class Msse676Client {
      */
     private static Ob getRemoteObs(GregorianCalendar gC1, GregorianCalendar gC2){
         RemoteObsImplService service = new RemoteObsImplService();
+        
+        // Set HandlerResolver
+        service.setHandlerResolver(new ServiceHandlerResolver());
+        
         RemoteObs port = service.getRemoteObsImplPort();
+        
+        
         
         // Service call requires XMLGregorianCalendar parameters
         // Uses port to call method from web service

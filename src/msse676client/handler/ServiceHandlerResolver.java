@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * This class supports adding Handler classes to a chain programmatically
  */
 package msse676client.handler;
 
@@ -13,6 +12,8 @@ import javax.xml.ws.handler.PortInfo;
 /**
  *
  * @author dougkrause
+ * msse676 - wk3
+ * 
  */
 
 // Before the client calls a remote service,  set HandlerResolver on the service
@@ -24,7 +25,7 @@ public class ServiceHandlerResolver implements HandlerResolver{
         
         List<Handler> handlers = new ArrayList<Handler>();
         handlers.add(new LoggingHandler());
-        handlers.add(new HeaderHandler());
+//        handlers.add(new HeaderHandler());
         
         return handlers;
     }

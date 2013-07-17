@@ -19,7 +19,6 @@ import javax.xml.ws.WebServiceFeature;
  * 
  */
 @WebServiceClient(name = "RemoteObsImplService", targetNamespace = "http://services/", wsdlLocation = "http://localhost:8080/msse676/RemoteObsImplService?wsdl")
-@HandlerChain(file = "handler-chain.xml")
 public class RemoteObsImplService
     extends Service
 {
