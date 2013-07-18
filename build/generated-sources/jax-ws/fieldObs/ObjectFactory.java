@@ -25,6 +25,7 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetFieldObsResponse_QNAME = new QName("http://services/", "getFieldObsResponse");
+    private final static QName _WeatherDataBean_QNAME = new QName("http://services/", "WeatherDataBean");
     private final static QName _GetFieldObs_QNAME = new QName("http://services/", "getFieldObs");
     private final static QName _ObsNotFoundException_QNAME = new QName("http://services/", "ObsNotFoundException");
 
@@ -52,19 +53,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetFieldObsResponse }
-     * 
-     */
-    public GetFieldObsResponse createGetFieldObsResponse() {
-        return new GetFieldObsResponse();
-    }
-
-    /**
      * Create an instance of {@link WeatherDataBean }
      * 
      */
     public WeatherDataBean createWeatherDataBean() {
         return new WeatherDataBean();
+    }
+
+    /**
+     * Create an instance of {@link GetFieldObsResponse }
+     * 
+     */
+    public GetFieldObsResponse createGetFieldObsResponse() {
+        return new GetFieldObsResponse();
     }
 
     /**
@@ -82,6 +83,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://services/", name = "getFieldObsResponse")
     public JAXBElement<GetFieldObsResponse> createGetFieldObsResponse(GetFieldObsResponse value) {
         return new JAXBElement<GetFieldObsResponse>(_GetFieldObsResponse_QNAME, GetFieldObsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link WeatherDataBean }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services/", name = "WeatherDataBean")
+    public JAXBElement<WeatherDataBean> createWeatherDataBean(WeatherDataBean value) {
+        return new JAXBElement<WeatherDataBean>(_WeatherDataBean_QNAME, WeatherDataBean.class, null, value);
     }
 
     /**

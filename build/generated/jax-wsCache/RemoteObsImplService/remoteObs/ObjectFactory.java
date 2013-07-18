@@ -69,11 +69,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Ob }
+     * Create an instance of {@link Observation }
      * 
      */
-    public Ob createOb() {
-        return new Ob();
+    public Observation createObservation() {
+        return new Observation();
     }
 
     /**

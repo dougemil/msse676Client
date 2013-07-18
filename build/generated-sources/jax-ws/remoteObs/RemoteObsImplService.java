@@ -3,7 +3,6 @@ package remoteObs;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.jws.HandlerChain;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
@@ -38,7 +37,6 @@ public class RemoteObsImplService
         REMOTEOBSIMPLSERVICE_WSDL_LOCATION = url;
         REMOTEOBSIMPLSERVICE_EXCEPTION = e;
     }
-    
 
     public RemoteObsImplService() {
         super(__getWsdlLocation(), REMOTEOBSIMPLSERVICE_QNAME);

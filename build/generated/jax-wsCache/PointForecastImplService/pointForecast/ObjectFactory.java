@@ -24,6 +24,7 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _ForecastBean_QNAME = new QName("http://services/", "ForecastBean");
     private final static QName _GetPointForecastResponse_QNAME = new QName("http://services/", "getPointForecastResponse");
     private final static QName _GetPointForecast_QNAME = new QName("http://services/", "getPointForecast");
 
@@ -56,6 +57,15 @@ public class ObjectFactory {
      */
     public ForecastBean createForecastBean() {
         return new ForecastBean();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ForecastBean }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://services/", name = "ForecastBean")
+    public JAXBElement<ForecastBean> createForecastBean(ForecastBean value) {
+        return new JAXBElement<ForecastBean>(_ForecastBean_QNAME, ForecastBean.class, null, value);
     }
 
     /**

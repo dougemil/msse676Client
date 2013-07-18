@@ -2,6 +2,8 @@
 
 <xs:element name="ObsNotFoundException" type="tns:ObsNotFoundException"/>
 
+<xs:element name="WeatherDataBean" type="tns:weatherDataBean"/>
+
 <xs:element name="getFieldObs" type="tns:getFieldObs"/>
 
 <xs:element name="getFieldObsResponse" type="tns:getFieldObsResponse"/>

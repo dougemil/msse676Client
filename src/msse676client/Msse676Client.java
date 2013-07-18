@@ -27,7 +27,7 @@ import msse676client.handler.ServiceHandlerResolver;
 import pointForecast.ForecastBean;
 import pointForecast.PointForecast;
 import pointForecast.PointForecastImplService;
-import remoteObs.Ob;
+import remoteObs.Observation;
 import remoteObs.RemoteObs;
 import remoteObs.RemoteObsImplService;
 
@@ -51,7 +51,7 @@ public class Msse676Client {
         // gC.set(1900, 0, 1);
         
         // Implements LoggingHandler programmatically
-        Ob ob = getRemoteObs(gC, gC);
+        Observation ob = getRemoteObs(gC, gC);
         System.out.println(ob.getMessage());
         
 
@@ -81,7 +81,7 @@ public class Msse676Client {
     /**
      * Use JAX-WS Generated Sources packages and Web Service References
      */
-    private static Ob getRemoteObs(GregorianCalendar gC1, GregorianCalendar gC2){
+    private static Observation getRemoteObs(GregorianCalendar gC1, GregorianCalendar gC2){
         RemoteObsImplService service = new RemoteObsImplService();
         
         // Set HandlerResolver

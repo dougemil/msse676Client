@@ -18,7 +18,7 @@ import javax.xml.ws.handler.MessageContext;
 import pointForecast.ForecastBean;
 import pointForecast.GetPointForecastResponse;
 import remoteObs.GetObsRangeResponse;
-import remoteObs.Ob;
+import remoteObs.Observation;
 
 /**
  *
@@ -51,7 +51,7 @@ public class LoggingHandler implements LogicalHandler<LogicalMessageContext> {
                         GetObsRangeResponse resp = (GetObsRangeResponse)obj;
                         // getReturn() is a convenience method
                         // ForecastBean maps to WSDL so its methods are available
-                        Ob ob = resp.getReturn();
+                        Observation ob = resp.getReturn();
                         Logger.getLogger(HeaderHandler.class.getName())
                                     .log(Level.INFO, "Logging from LoggingHandler");
                     }

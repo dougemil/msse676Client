@@ -30,14 +30,14 @@ public interface RemoteObs {
      * @param arg1
      * @param arg0
      * @return
-     *     returns remoteObs.Ob
+     *     returns remoteObs.Observation
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getObsRange", targetNamespace = "http://services/", className = "remoteObs.GetObsRange")
     @ResponseWrapper(localName = "getObsRangeResponse", targetNamespace = "http://services/", className = "remoteObs.GetObsRangeResponse")
     @Action(input = "http://services/RemoteObs/getObsRangeRequest", output = "http://services/RemoteObs/getObsRangeResponse")
-    public Ob getObsRange(
+    public Observation getObsRange(
         @WebParam(name = "arg0", targetNamespace = "")
         XMLGregorianCalendar arg0,
         @WebParam(name = "arg1", targetNamespace = "")
@@ -47,14 +47,14 @@ public interface RemoteObs {
      * 
      * @param arg0
      * @return
-     *     returns remoteObs.Ob
+     *     returns remoteObs.Observation
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getMostRecentOb", targetNamespace = "http://services/", className = "remoteObs.GetMostRecentOb")
     @ResponseWrapper(localName = "getMostRecentObResponse", targetNamespace = "http://services/", className = "remoteObs.GetMostRecentObResponse")
     @Action(input = "http://services/RemoteObs/getMostRecentObRequest", output = "http://services/RemoteObs/getMostRecentObResponse")
-    public Ob getMostRecentOb(
+    public Observation getMostRecentOb(
         @WebParam(name = "arg0", targetNamespace = "")
         XMLGregorianCalendar arg0);
 

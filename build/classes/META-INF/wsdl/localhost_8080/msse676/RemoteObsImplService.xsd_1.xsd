@@ -16,11 +16,11 @@
 
 <xs:complexType name="getMostRecentObResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:ob" minOccurs="0"/>
+<xs:element name="return" type="tns:observation" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="ob">
+<xs:complexType name="observation">
 <xs:sequence>
 <xs:element name="message" type="xs:string" minOccurs="0"/>
 </xs:sequence>
@@ -35,7 +35,7 @@
 
 <xs:complexType name="getObsRangeResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:ob" minOccurs="0"/>
+<xs:element name="return" type="tns:observation" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>
