@@ -16,18 +16,21 @@ import java.net.URI;
  *
  * @author dougkrause
  */
-public class newRESTClient {
+public class Msse676_RESTClient {
     
     public static void main(String[] args){
         ClientConfig config = new DefaultClientConfig();
         Client client = Client.create(config);
         WebResource service = client.resource(getBaseURI());
         
-        System.out.println(service.path("rest").path("customers").path("1234")
+        String dateString = "2012-01-01";
+        
+//        System.out.println(service.path("rest").path("fieldObs").path(dateString)
+//                .accept(MediaType.APPLICATION_XML).get(String.class));
+        
+        System.out.println(service.path("rest").path("fieldObs").path(dateString)
                 .accept(MediaType.APPLICATION_XML).get(String.class));
         
-        System.out.println(service.path("rest").path("customers")
-                .accept(MediaType.APPLICATION_JSON).get(String.class));
         
     }
     
