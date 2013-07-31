@@ -1,7 +1,7 @@
 /*
  * This class tests RESTful Web Resources deployed in msse676
  * Also tests resource deployed at http://api.wunderground.com/api/
- * Uses CLientConfig, WebResource and URIBuilder classes
+ * Uses ClientConfig, WebResource and URIBuilder classes
  * Outputs raw XML received from a web resource
  * 
  */
@@ -21,7 +21,7 @@ import msse676client.handler.HeaderHandler;
 /**
  *
  * @author dougkrause
- * msse676 - wk4
+ * msse676 - wk5
  * 
  */
 public class Msse676_RESTClient {
@@ -37,15 +37,45 @@ public class Msse676_RESTClient {
         WebResource service = client.resource(getBaseURI());
         
         String dateString = "2012-01-01";
+        String location = "Tasnuna Glacier";
         
         Logger.getLogger(Msse676_RESTClient.class.getName())
-                                    .log(Level.INFO, "Accessing FieldObsResource");
+                                    .log(Level.INFO,
+                                    "Accessing FieldObsResource:"
+                                    + " Retrieving Field Obs from DB");
         
         // Define service path, identify expected return MediaType and fetch
+        // Testing dependency injection of RESTful resource
         System.out.println(service.path("rest").path("fieldObs")
                                                 .path(dateString)
                                                 .accept(MediaType.APPLICATION_XML)
                                                 .get(String.class));
+        
+        System.out.println();
+        Logger.getLogger(Msse676_RESTClient.class.getName())
+                                    .log(Level.INFO,
+                                    "Accessing FieldObsResource:"
+                                    + " Persisting new bean to DB");
+        
+        dateString = "2012-12-12";
+        // Testing dependency injection of RESTful resource
+        System.out.println(service.path("rest").path("fieldObs")
+                                                .path(dateString)
+                                                .path(location)
+                                                .accept(MediaType.APPLICATION_XML)
+                                                .post(String.class));
+        
+        System.out.println();
+        Logger.getLogger(Msse676_RESTClient.class.getName())
+                                    .log(Level.INFO,
+                                    "Accessing FieldObsResource:"
+                                    + " Deleting new bean from DB");
+        
+        // Testing dependency injection of RESTful resource
+        System.out.println(service.path("rest").path("fieldObs")
+                                                .path(dateString)
+                                                .accept(MediaType.APPLICATION_XML)
+                                                .delete(String.class));
         
         // Pause execution so Log msg will print above resource return
         try {
