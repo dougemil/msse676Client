@@ -1,13 +1,15 @@
 /*
  * This class tests RESTful Web Resources deployed in msse676
- * Also tests resource deployed at http://api.wunderground.com/api/
  * Uses ClientConfig, WebResource and URIBuilder classes
- * Outputs raw XML received from a web resource
+ * Outputs raw XML and JSON received from a web resource
+ * Tests various ofrms of content negotiation and return media types
  * 
  */
 package msse676client;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -36,21 +38,34 @@ public class Msse676_RESTClient {
         Client client = Client.create(config);
         WebResource service = client.resource(getBaseURI());
         
+        ClientResponse clientResponse;
+        int statusCode;
+        
         String dateString = "2012-01-01";
         String location = "Tasnuna Glacier";
+        String format = "format";
         
         Logger.getLogger(Msse676_RESTClient.class.getName())
                                     .log(Level.INFO,
                                     "Accessing FieldObsResource:"
-                                    + " Retrieving Field Obs from DB");
+                                    + " Retrieving XML and JSON Field Obs from DB");
         
-        // Define service path, identify expected return MediaType and fetch
-        // Testing dependency injection of RESTful resource
+        System.out.println("XML content returned");
+        // Negotiate content via header, request XML content
         System.out.println(service.path("rest").path("fieldObs")
                                                 .path(dateString)
                                                 .accept(MediaType.APPLICATION_XML)
                                                 .get(String.class));
+        clientResponse = service.head();
+        System.out.println(clientResponse.getStatus());
         
+        System.out.println();
+        
+        // Negotiate content based on URL, request JSON content
+        System.out.println(service.path("rest").path("fieldObs")
+                                                .path(dateString + ".json")
+                                                .get(String.class));
+             
         System.out.println();
         Logger.getLogger(Msse676_RESTClient.class.getName())
                                     .log(Level.INFO,
@@ -64,8 +79,13 @@ public class Msse676_RESTClient {
                                                 .path(location)
                                                 .accept(MediaType.APPLICATION_XML)
                                                 .post(String.class));
+        clientResponse = service.head();
+        statusCode = clientResponse.getStatus();
+        if(statusCode==200)
+            System.out.println("Field Obs Saved.");
         
         System.out.println();
+        
         Logger.getLogger(Msse676_RESTClient.class.getName())
                                     .log(Level.INFO,
                                     "Accessing FieldObsResource:"
@@ -77,6 +97,27 @@ public class Msse676_RESTClient {
                                                 .accept(MediaType.APPLICATION_XML)
                                                 .delete(String.class));
         
+        clientResponse = service.head();
+        statusCode = clientResponse.getStatus();
+        if(statusCode==200)
+            System.out.println("Field Obs deleted.");
+        
+        
+        try{
+            System.out.println(service.path("rest").path("fieldObs")
+                                                    .path(dateString)
+                                                    .accept(MediaType.APPLICATION_XML)
+                                                    .get(String.class));
+        }catch(UniformInterfaceException uIE){
+            clientResponse = uIE.getResponse();
+            statusCode = clientResponse.getStatus();
+//            System.out.print(statusCode);
+            if(statusCode==416)
+                System.out.println("No obs found for the requested date parameter");
+        }
+        Logger.getLogger(Msse676_RESTClient.class.getName())
+                                    .log(Level.INFO, "Accessing PointForecastResource");
+        
         // Pause execution so Log msg will print above resource return
         try {
             Thread.sleep(1000);
@@ -84,41 +125,61 @@ public class Msse676_RESTClient {
         } catch (InterruptedException ex) {
             Logger.getLogger(Msse676_RESTClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+          
         
-        
-        Logger.getLogger(Msse676_RESTClient.class.getName())
-                                    .log(Level.INFO, "Accessing PointForecastResource");
-        
-        // Define service path, identify expected return MediaType and fetch
+        // Negotiate content via Request Parameter
         System.out.println(service.path("rest").path("pointForecast")
                                                 .path("1")
                                                 .path("1")
                                                 .path(dateString)
-                                                .accept(MediaType.APPLICATION_XML)
+                                                .queryParam(format, "json")
+                                                .accept(MediaType.APPLICATION_JSON)
                                                 .get(String.class));
         
-        // Pause execution so Log msg will print above resource return
-        try {
-            Thread.sleep(1000);
-            System.out.println();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Msse676_RESTClient.class.getName()).log(Level.SEVERE, null, ex);
+        System.out.println(service.path("rest").path("pointForecast")
+                                                .path("1")
+                                                .path("1")
+                                                .path(dateString)
+                                                .queryParam(format, "xml")
+                                                .accept(MediaType.APPLICATION_XML)
+                                                .get(String.class));
+        try{
+            System.out.println(service.path("rest").path("pointForecast")
+                                                    .path("1")
+                                                    .path("1")
+                                                    .path(dateString)
+                                                    .queryParam(format, "fail")
+                                                    .accept(MediaType.APPLICATION_XML)
+                                                    .get(String.class));
+        }catch(UniformInterfaceException uIE){
+            
+            clientResponse = uIE.getResponse();
+            statusCode = clientResponse.getStatus();
+            if(statusCode==415)
+                System.out.println("The requested return media type is not supported");
         }
-        
-        // Change baseURI to access third part resource
-        resourceURI = "http://api.wunderground.com/api/";
-        service = client.resource(getBaseURI());
-        
-        Logger.getLogger(Msse676_RESTClient.class.getName())
-                                    .log(Level.INFO, "Accessing wunderground.com");
-        
-        // Define service path, identify expected return MediaType and fetch
-        System.out.println(service.path("4b17eee045c8dda6").path("conditions")
-                                                           .path("q")
-                                                           .path("AK")
-                                                           .path("Valdez.xml")
-                                                .accept(MediaType.APPLICATION_XML)
-                                                .get(String.class));
+        // Pause execution so Log msg will print above resource return
+//        try {
+//            Thread.sleep(1000);
+//            System.out.println();
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(Msse676_RESTClient.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        // Change baseURI to access third part resource
+//        resourceURI = "http://api.wunderground.com/api/";
+//        service = client.resource(getBaseURI());
+//        
+//        Logger.getLogger(Msse676_RESTClient.class.getName())
+//                                    .log(Level.INFO, "Accessing wunderground.com");
+//        
+//        // Define service path, identify expected return MediaType and fetch
+//        System.out.println(service.path("4b17eee045c8dda6").path("conditions")
+//                                                           .path("q")
+//                                                           .path("AK")
+//                                                           .path("Valdez.xml")
+//                                                .accept(MediaType.APPLICATION_XML)
+//                                                .get(String.class));
     }
     
     // UriBuilder is called by the service object to facilitate
