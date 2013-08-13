@@ -142,28 +142,12 @@ public class Msse676_RESTClient {
         } catch (InterruptedException ex) {
             Logger.getLogger(Msse676_RESTClient.class.getName()).log(Level.SEVERE, null, ex);
         }
-          
-        
-        // ** Negotiate content via Request Parameter for different media types
+         
+        dateString = "2012-01-01";
         System.out.println(service.path("rest").path("pointForecast")
                                                 .path("1")
                                                 .path("1")
                                                 .path(dateString)
-                                                .queryParam(format, "json")
-                                                .accept(MediaType.APPLICATION_JSON)
-                                                .get(String.class));
-        
-        // ** Evaluate response code
-        clientResponse = service.head();
-        statusCode = clientResponse.getStatus();
-        if(statusCode==200)
-            System.out.println("** JSON content returned.");
-        
-        System.out.println(service.path("rest").path("pointForecast")
-                                                .path("1")
-                                                .path("1")
-                                                .path(dateString)
-                                                .queryParam(format, "xml")
                                                 .accept(MediaType.APPLICATION_XML)
                                                 .get(String.class));
         
@@ -173,22 +157,22 @@ public class Msse676_RESTClient {
         if(statusCode==200)
             System.out.println("** XML content returned.");
         
-        // ** Manage Error Response Scenario
-        try{
-            System.out.println(service.path("rest").path("pointForecast")
-                                                    .path("1")
-                                                    .path("1")
-                                                    .path(dateString)
-                                                    .queryParam(format, "fail")
-                                                    .accept(MediaType.APPLICATION_XML)
-                                                    .get(String.class));
-        }catch(UniformInterfaceException uIE){
-            
-            clientResponse = uIE.getResponse();
-            statusCode = clientResponse.getStatus();
-            if(statusCode==415)
-                System.out.println("** The requested return media type is not supported");
-        }
+//        // ** Manage Error Response Scenario
+//        try{
+//            System.out.println(service.path("rest").path("pointForecast")
+//                                                    .path("1")
+//                                                    .path("1")
+//                                                    .path(dateString)
+//                                                    .queryParam(format, "fail")
+//                                                    .accept(MediaType.APPLICATION_XML)
+//                                                    .get(String.class));
+//        }catch(UniformInterfaceException uIE){
+//            
+//            clientResponse = uIE.getResponse();
+//            statusCode = clientResponse.getStatus();
+//            if(statusCode==415)
+//                System.out.println("** The requested return media type is not supported");
+//        }
     }
     
     // UriBuilder is called by the service object to facilitate
