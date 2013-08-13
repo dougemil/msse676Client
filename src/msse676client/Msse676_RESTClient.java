@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import msse676client.handler.HeaderHandler;
+import services.BriefPause;
 
 /**
  *
@@ -136,43 +137,23 @@ public class Msse676_RESTClient {
         Logger.getLogger(Msse676_RESTClient.class.getName())
                                     .log(Level.INFO, "Accessing PointForecastResource");
         
-        try {
-            Thread.sleep(1000);
-            System.out.println();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Msse676_RESTClient.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        BriefPause.pause();
          
-        dateString = "2012-01-01";
-        System.out.println(service.path("rest").path("pointForecast")
-                                                .path("1")
-                                                .path("1")
-                                                .path(dateString)
-                                                .accept(MediaType.APPLICATION_XML)
-                                                .get(String.class));
-        
-        // ** Evaluate response code
-        clientResponse = service.head();
-        statusCode = clientResponse.getStatus();
-        if(statusCode==200)
-            System.out.println("** XML content returned.");
-        
-//        // ** Manage Error Response Scenario
-//        try{
-//            System.out.println(service.path("rest").path("pointForecast")
-//                                                    .path("1")
-//                                                    .path("1")
-//                                                    .path(dateString)
-//                                                    .queryParam(format, "fail")
-//                                                    .accept(MediaType.APPLICATION_XML)
-//                                                    .get(String.class));
-//        }catch(UniformInterfaceException uIE){
-//            
-//            clientResponse = uIE.getResponse();
-//            statusCode = clientResponse.getStatus();
-//            if(statusCode==415)
-//                System.out.println("** The requested return media type is not supported");
-//        }
+        try{
+            dateString = "2012-01-01";
+            System.out.println(service.path("rest").path("pointForecast")
+                                                    .path("1")
+                                                    .path("1")
+                                                    .path(dateString)
+                                                    .accept(MediaType.APPLICATION_XML)
+                                                    .get(String.class));
+        }catch(UniformInterfaceException uIE){
+            
+            clientResponse = uIE.getResponse();
+            statusCode = clientResponse.getStatus();
+            System.out.println("***Status Code: " + statusCode);
+            uIE.printStackTrace();
+        }
     }
     
     // UriBuilder is called by the service object to facilitate
