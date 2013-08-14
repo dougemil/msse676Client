@@ -15,9 +15,12 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import domain.WeatherDataBean;
+//import fieldObs.WeatherDataBean;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
@@ -93,20 +96,33 @@ public class Msse676_RESTClient {
                                                 .path(location)
                                                 .accept(MediaType.APPLICATION_XML)
                                                 .post(String.class));
-        // ** Evaluate response code
-        clientResponse = service.head();
-        statusCode = clientResponse.getStatus();
-        if(statusCode==200)
-            System.out.println("Field Obs Saved.");
-        else
-            System.out.println("** Field Obs Not Saved.");
         
-        System.out.println();
+        ///////************ Working, needs refinement
+        WeatherDataBean wxBean = new WeatherDataBean();
+        //long benchTime = new Date().getTime();
         
-        Logger.getLogger(Msse676_RESTClient.class.getName())
-                                    .log(Level.INFO,
-                                    "Accessing FieldObsResource:"
-                                    + " Deleting new bean from DB");
+        //wxBean.setSqlDate(new java.sql.Date(benchTime)); ***cant use java.sql.date >> no default constructor
+        wxBean.setDateString("2013-08-08");
+        wxBean.setLocation("White Room");
+        wxBean.setComments("Great day in the morning!");
+        
+        service.path("rest").path("fieldObs").path("newFieldObs")                                               
+                                                .accept(MediaType.APPLICATION_XML)
+                                                .post(WeatherDataBean.class, wxBean);
+//        // ** Evaluate response code
+//        clientResponse = service.head();
+//        statusCode = clientResponse.getStatus();
+//        if(statusCode==200)
+//            System.out.println("Field Obs Saved.");
+//        else
+//            System.out.println("** Field Obs Not Saved.");
+//        
+//        System.out.println();
+//        
+//        Logger.getLogger(Msse676_RESTClient.class.getName())
+//                                    .log(Level.INFO,
+//                                    "Accessing FieldObsResource:"
+//                                    + " Deleting new bean from DB");
         
         System.out.println(service.path("rest").path("fieldObs")
                                                 .path(dateString)
