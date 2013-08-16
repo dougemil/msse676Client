@@ -15,6 +15,7 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import domain.ForecastBean;
 import domain.WeatherDataBean;
 //import fieldObs.WeatherDataBean;
 import javax.ws.rs.core.MediaType;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import msse676client.handler.HeaderHandler;
+
 import services.BriefPause;
 
 /**
@@ -56,7 +58,7 @@ public class Msse676_RESTClient {
         Logger.getLogger(Msse676_RESTClient.class.getName())
                                     .log(Level.INFO,
                                     "Accessing FieldObsResource:"
-                                    + " Retrieving XML and JSON Field Obs from DB");
+                                    + " Retrieving XML from DB");
         
         // ** Negotiate content via header, request XML content
         System.out.println(service.path("rest").path("fieldObs")
@@ -64,25 +66,13 @@ public class Msse676_RESTClient {
                                                 .accept(MediaType.APPLICATION_XML)
                                                 .get(String.class));
         
+        
         // ** Evaluate response code
         clientResponse = service.head();
         statusCode = clientResponse.getStatus();
         if(statusCode==200)
             System.out.println("** XML content returned.");
         
-        System.out.println();
-        
-        // ** Negotiate content based on URL, request JSON content
-        System.out.println(service.path("rest").path("fieldObs")
-                                                .path(dateString + ".json")
-                                                .get(String.class));
-        
-        // ** Evaluate response code
-        clientResponse = service.head();
-        statusCode = clientResponse.getStatus();
-        if(statusCode==200)
-            System.out.println("** JSON content returned.");
-             
         System.out.println();
         
         Logger.getLogger(Msse676_RESTClient.class.getName())
@@ -102,13 +92,15 @@ public class Msse676_RESTClient {
         //long benchTime = new Date().getTime();
         
         //wxBean.setSqlDate(new java.sql.Date(benchTime)); ***cant use java.sql.date >> no default constructor
-        wxBean.setDateString("2013-08-08");
-        wxBean.setLocation("White Room");
-        wxBean.setComments("Great day in the morning!");
+//        wxBean.setDateString("2013-08-08");
+//        wxBean.setLocation("White Room");
+//        wxBean.setComments("Great day in the morning!");
+//        
+//        service.path("rest").path("fieldObs").path("newFieldObs")                                               
+//                                                .accept(MediaType.APPLICATION_XML)
+//                                                .post(WeatherDataBean.class, wxBean);
+//        
         
-        service.path("rest").path("fieldObs").path("newFieldObs")                                               
-                                                .accept(MediaType.APPLICATION_XML)
-                                                .post(WeatherDataBean.class, wxBean);
 //        // ** Evaluate response code
 //        clientResponse = service.head();
 //        statusCode = clientResponse.getStatus();
@@ -154,7 +146,33 @@ public class Msse676_RESTClient {
                                     .log(Level.INFO, "Accessing PointForecastResource");
         
         BriefPause.pause();
-         
+// Testing PointForcastResource of msse676
+// Testing POST
+       
+        ForecastBean fcstBean = new ForecastBean();
+        fcstBean.setStringDate("2013-01-01");
+        fcstBean.setLocation("Meteorite");
+        fcstBean.setForecastText("Test bean from msse676_RESTClient");
+        
+        try{
+            fcstBean = service.path("rest")
+                                        .path("pointForecast")
+                                        .path("newForecast")                                                  
+                                        .accept(MediaType.APPLICATION_XML)
+                                        .post(ForecastBean.class, fcstBean);
+            
+            System.out.println(fcstBean.getForecastText());
+            
+        }catch(UniformInterfaceException uIE){
+            
+            clientResponse = uIE.getResponse();
+            statusCode = clientResponse.getStatus();
+            System.out.println("***Testing PointForcastResource");
+            System.out.println("***Status Code: " + statusCode);
+            uIE.printStackTrace();
+        }
+        
+        
         try{
             dateString = "2012-01-01";
             System.out.println(service.path("rest").path("pointForecast")

@@ -3,7 +3,6 @@ package fieldObs;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import javax.jws.HandlerChain;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Service;
 import javax.xml.ws.WebEndpoint;
@@ -19,7 +18,6 @@ import javax.xml.ws.WebServiceFeature;
  * 
  */
 @WebServiceClient(name = "FieldObsImplService", targetNamespace = "http://services/", wsdlLocation = "http://localhost:8080/msse676/FieldObsImplService?wsdl")
-@HandlerChain(file="handler-chain.xml")
 public class FieldObsImplService
     extends Service
 {
