@@ -29,6 +29,7 @@ import javax.ws.rs.core.Response.Status;
 import msse676client.handler.HeaderHandler;
 
 import services.BriefPause;
+import services.ConvertDateStringToSqlDate;
 
 /**
  *
@@ -147,12 +148,13 @@ public class Msse676_RESTClient {
         
         BriefPause.pause();
 // Testing PointForcastResource of msse676
-// Testing POST
+// Testing POST /newForecast
        
         ForecastBean fcstBean = new ForecastBean();
         fcstBean.setStringDate("2013-01-01");
         fcstBean.setLocation("Meteorite");
         fcstBean.setForecastText("Test bean from msse676_RESTClient");
+        fcstBean.setSqlDate(ConvertDateStringToSqlDate.convert("2013-01-01"));
         
         try{
             fcstBean = service.path("rest")
@@ -172,6 +174,28 @@ public class Msse676_RESTClient {
             uIE.printStackTrace();
         }
         
+// Test POST updateForecast
+        fcstBean.setForecastText("Updating forecastText");
+        
+        try{
+            fcstBean = service.path("rest")
+                                        .path("pointForecast")
+                                        .path("updateForecast")                                                  
+                                        .accept(MediaType.APPLICATION_XML)
+                                        .post(ForecastBean.class, fcstBean);
+            
+            System.out.println(fcstBean.getForecastText());
+            
+        }catch(UniformInterfaceException uIE){
+            
+            clientResponse = uIE.getResponse();
+            statusCode = clientResponse.getStatus();
+            System.out.println("***Testing PointForcastResource");
+            System.out.println("***Status Code: " + statusCode);
+            uIE.printStackTrace();
+        }
+        
+// Test GET
         
         try{
             dateString = "2012-01-01";
@@ -188,7 +212,32 @@ public class Msse676_RESTClient {
             System.out.println("***Status Code: " + statusCode);
             uIE.printStackTrace();
         }
+        
+// Test POST deleteForecast
+        
+        try{
+            service.path("rest")
+                    .path("pointForecast")
+                    .path("deleteForecast")                                                  
+                    .accept(MediaType.APPLICATION_XML)
+                    .post(ForecastBean.class, fcstBean);
+            
+            System.out.println("fcstBean delted");
+            
+        }catch(UniformInterfaceException uIE){
+            
+            clientResponse = uIE.getResponse();
+            statusCode = clientResponse.getStatus();
+            System.out.println("***Testing PointForcastResource");
+            System.out.println("***Status Code: " + statusCode);
+            uIE.printStackTrace();
+        }
+        
     }
+    
+
+    
+    
     
     // UriBuilder is called by the service object to facilitate
     //  the chaining of the remaining path labels to the base URI

@@ -36,7 +36,7 @@ public class ForecastBean {
      */
     @Id // Id defined for entity hierarchy
     @Column(name="sqlDate")
-    @XmlJavaTypeAdapter(SqlDateAdapter.class)
+    @XmlJavaTypeAdapter(SqlDateAdapter.class) // allows passing via JAX-WS
     public Date getSqlDate() {
         return sqlDate;
     }
