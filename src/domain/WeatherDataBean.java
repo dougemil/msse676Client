@@ -26,7 +26,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import org.hibernate.validator.constraints.NotEmpty;
+import services.SqlDateAdapter;
 
 @XmlRootElement(name="WeatherDataBean")
 @Entity // JPA annotation identifies POJO as a JPA entity
@@ -76,7 +78,8 @@ public class WeatherDataBean implements Serializable{
 	}
         
         @Id // JPA annotation identifies this field as the primary key
-        @Column(name="date") // JPA annotation
+        @Column(name="sqlDate") // JPA annotation
+        @XmlJavaTypeAdapter(SqlDateAdapter.class)// Adapts java.sql.Date for jax-ws
 	public Date getSqlDate() {
 		return sqlDate;
 	}
