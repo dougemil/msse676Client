@@ -1,12 +1,4 @@
-/*
- * This class tests RESTful Web Resources deployed in msse676
- * Uses ClientConfig, WebResource and URIBuilder classes
- * Outputs raw XML and JSON received from a web resource
- * 
- * Tests various forms of content negotiation and return media types
- * Evaluates response codes and manages error responses
- * 
- */
+
 package msse676client;
 
 import com.sun.jersey.api.client.Client;
@@ -34,7 +26,14 @@ import services.ConvertDateStringToSqlDate;
 /**
  *
  * @author dougkrause
- * msse676 - wk6
+ * msse676 - wk7
+ * 
+ * * This class tests RESTful Web Resources deployed in msse676
+ * Uses ClientConfig, WebResource and URIBuilder classes
+ * Receives XML data from resource and converts into 
+ *      WeatherDataBena and ForecastBean entities
+ * 
+ * Evaluates response codes and manages error responses
  * 
  */
 public class Msse676_RESTClient {
@@ -57,12 +56,11 @@ public class Msse676_RESTClient {
 //************ Testing FieldObsResource of msse676
   
 // Testing POST /newFieldObs
+        
         WeatherDataBean wxBean = new WeatherDataBean();
         wxBean.setDateString("2013-01-01");
         wxBean.setLocation("Tasnuna Glacier");
         wxBean.setComments("Testing POST /newFieldObs");
-        
-        String format = "format";
         
         Logger.getLogger(Msse676_RESTClient.class.getName())
                                     .log(Level.INFO,
@@ -165,71 +163,6 @@ public class Msse676_RESTClient {
             System.out.println("***Status Code: " + statusCode);
             uIE.printStackTrace();
         }
-        
-        
-        
-//        // ** Negotiate content via header, request XML content
-//        System.out.println(service.path("rest").path("fieldObs")
-//                                                .path(dateString)
-//                                                .accept(MediaType.APPLICATION_XML)
-//                                                .get(String.class));
-//        
-//        
-//        // ** Evaluate response code
-//        clientResponse = service.head();
-//        statusCode = clientResponse.getStatus();
-//        if(statusCode==200)
-//            System.out.println("** XML content returned.");
-//        
-//        System.out.println();
-//        
-//        
-//        
-//        ///////************ Working, needs refinement
-//        WeatherDataBean wxBean = new WeatherDataBean();
-//        //long benchTime = new Date().getTime();
-//        
-//        //wxBean.setSqlDate(new java.sql.Date(benchTime)); ***cant use java.sql.date >> no default constructor
-////        wxBean.setDateString("2013-08-08");
-////        wxBean.setLocation("White Room");
-////        wxBean.setComments("Great day in the morning!");
-////        
-////        service.path("rest").path("fieldObs").path("newFieldObs")                                               
-////                                                .accept(MediaType.APPLICATION_XML)
-////                                                .post(WeatherDataBean.class, wxBean);
-////        
-//        
-////        // ** Evaluate response code
-////        clientResponse = service.head();
-////        statusCode = clientResponse.getStatus();
-////        if(statusCode==200)
-////            System.out.println("Field Obs Saved.");
-////        else
-////            System.out.println("** Field Obs Not Saved.");
-////        
-////        System.out.println();
-////        
-////        Logger.getLogger(Msse676_RESTClient.class.getName())
-////                                    .log(Level.INFO,
-////                                    "Accessing FieldObsResource:"
-////                                    + " Deleting new bean from DB");
-//        
-        
-//        
-//        // ** Evaluate response code
-//        clientResponse = service.head();
-//        statusCode = clientResponse.getStatus();
-//        if(statusCode==200)
-//            System.out.println("Field Obs Deleted.");
-//        else
-//            System.out.println("Field Obs Not Deleted.");
-//        
-//        
-        // ** Manage Error Response Scenario
-        
-        
-//        BriefPause.pause();
-        
         
 System.out.println("********* Testing PointForecastResource of msse676");
         
