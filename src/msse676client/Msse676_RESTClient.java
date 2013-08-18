@@ -7,6 +7,7 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import domain.ForecastBean;
 import domain.WeatherDataBean;
 //import fieldObs.WeatherDataBean;
@@ -26,7 +27,7 @@ import services.ConvertDateStringToSqlDate;
 /**
  *
  * @author dougkrause
- * msse676 - wk7
+ * msse676 - wk8
  * 
  * * This class tests RESTful Web Resources deployed in msse676
  * Uses ClientConfig, WebResource and URIBuilder classes
@@ -39,19 +40,27 @@ import services.ConvertDateStringToSqlDate;
 public class Msse676_RESTClient {
     
     // URI to be used by URIBuilder class in getBaseURI
-    private static String resourceURI = "http://localhost:8080/msse676";
+    // Server diverts port 8080 requests to secure location at 8181
+    private static String resourceURI = "https://localhost:8181/msse676";
     
     public static void main(String[] args){
         
         // Configure client and identify base resource
         ClientConfig config = new DefaultClientConfig();
         Client client = Client.create(config);
-        WebResource service = client.resource(getBaseURI());
+        
         
         ClientResponse clientResponse;
         int statusCode;
         String dateString = "2012-01-01";
         
+        // Filter adds authorization credentials
+        // Security certificate added to JRE for SSL access
+        HTTPBasicAuthFilter authFilter = 
+                                new HTTPBasicAuthFilter("dougemil","cooter");
+        client.addFilter(authFilter);
+       
+        WebResource service = client.resource(getBaseURI());
         
 //************ Testing FieldObsResource of msse676
   
