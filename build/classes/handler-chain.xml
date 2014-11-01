@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Handler Chain Configuration File adds Handlers Declaratively-->
+<!-- Need to annotate generated implementation service file:
+     @HandlerChain(file="handler-chain.xml") 
+
+    Douglas Krause - msse676 - wk3                                  -->
+
+<javaee:handler-chains
+    xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+    xmlns:ksd="http://www.w3.org/2001/XML/Schema">
+    <javaee:handler-chain>
+        <javaee:handler>
+            <javaee:handler-class>msse676client.handler.HeaderHandler</javaee:handler-class>
+        </javaee:handler>
+    </javaee:handler-chain>
+</javaee:handler-chains>
